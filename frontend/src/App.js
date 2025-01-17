@@ -1,4 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Register from "./Pages/Register.js";
+
 import "./App.css";
 
 function App() {
@@ -12,6 +14,7 @@ function App() {
         </div>
       ),
     },
+    { path: "/register", element: <Register /> },
   ]);
 
   return (
