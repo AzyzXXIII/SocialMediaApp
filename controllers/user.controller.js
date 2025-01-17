@@ -3,16 +3,17 @@ const User = require("../models/users.model");
 
 exports.signup = async (req, res) => {
   try {
+    console.log(req.body);
     // Hash the hardcoded password
     const hashedPassword = await bcrypt.hash("123456", 10);
 
     // Hardcoded data
     const data = {
-      firstName: "Azyz",
-      lastName: "Hcini",
-      email: "aziz@esen.tn",
-      password: hashedPassword,
-      bio: "I am a software engineer",
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      bio: req.body.bio,
       picture: "",
       birthDate: new Date("2003-12-23"),
     };
