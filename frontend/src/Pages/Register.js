@@ -9,6 +9,20 @@ const Register = () => {
   const [picture, setPicture] = useState("");
   const [birthDate, setBirthDate] = useState("");
 
+  const submit = (e) => {
+    e.preventDefault();
+    const user = {
+      firstName,
+      lastName,
+      email,
+      password,
+      bio,
+      picture,
+      birthDate,
+    };
+    console.log(user);
+  };
+
   return (
     <div className="register">
       <div className="register-cover"></div>
@@ -16,7 +30,7 @@ const Register = () => {
         <h1>DARK SPACE</h1>
         <p>social Media Application</p>
         <div>
-          <from>
+          <form onSubmit={submit}>
             <div className="form-group">
               <label>FirstName</label>
               <input
@@ -72,8 +86,10 @@ const Register = () => {
                 onChange={(e) => setBirthDate(e.target.value)}
               />
             </div>
-            <button btn-form>Sign Up</button>
-          </from>
+            <button className="btn-form" type="submit">
+              Sign Up
+            </button>
+          </form>
         </div>
       </div>
     </div>
