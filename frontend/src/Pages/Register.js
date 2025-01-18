@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import userService from "../Services/userService";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -9,9 +11,11 @@ const Register = () => {
   const [picture, setPicture] = useState("");
   const [birthDate, setBirthDate] = useState("");
 
-  const submit = (e) => {
+  const register = async (e) => {
     e.preventDefault();
-    const user = {
+    console.log("Registering...");
+
+    const userData = {
       firstName,
       lastName,
       email,
@@ -20,17 +24,34 @@ const Register = () => {
       picture,
       birthDate,
     };
-    console.log(user);
+
+    try {
+      const response = await userService.register(userData);
+      console.log("========>", response);
+      toast.success("Successfully created!");
+
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setBio("");
+      setPicture("");
+      setBirthDate("");
+    } catch (error) {
+      console.log(error);
+      toast.error("This is an error!");
+    }
   };
 
   return (
     <div className="register">
+      <Toaster />
       <div className="register-cover"></div>
       <div className="register-content">
         <h1>DARK SPACE</h1>
         <p>social Media Application</p>
         <div>
-          <form onSubmit={submit}>
+          <form onSubmit={register}>
             <div className="form-group">
               <label>FirstName</label>
               <input

@@ -1,8 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Register from "./Pages/Register.js";
-
+import React from "react";
+import Register from "./Pages/Register";
 import "./App.css";
-
 function App() {
   const router = createBrowserRouter([
     { path: "/", element: <div>HOME PAGE</div> },
@@ -17,11 +16,7 @@ function App() {
     { path: "/register", element: <Register /> },
   ]);
 
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
