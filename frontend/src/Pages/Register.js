@@ -22,13 +22,7 @@ const Register = () => {
 
   const formValidation = () => {
     const localErrors = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      bio: "",
-      picture: "",
-      birthDate: "",
+      ...errors,
     };
     let isValid = true;
 

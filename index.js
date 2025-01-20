@@ -2,9 +2,12 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 require("dotenv").config();
+const cors = require("cors");
 
 // Middleware to parse JSON
 app.use(express.json());
+
+app.use(cors());
 
 // Routes
 app.get("/", (req, res) => {

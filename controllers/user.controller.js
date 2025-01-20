@@ -12,7 +12,7 @@ exports.signup = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      password: req.body.password,
+      password: bcrypt.hashSync(req.body.password, 10),
       bio: req.body.bio,
       picture: "",
       birthDate: new Date("2003-12-23"),
