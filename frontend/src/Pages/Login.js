@@ -58,6 +58,10 @@ export const Login = () => {
       const response = await userService.login(userData);
       console.log("========>", response);
       toast.success("Successfully CONNECTED!");
+
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("userData", JSON.stringify(response.data.user));
+
       navigate("/home");
 
       // Reset form fields
