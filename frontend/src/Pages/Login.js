@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../Style/Login.css";
 import toast, { Toaster } from "react-hot-toast";
 import userService from "../Services/userService";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,8 @@ export const Login = () => {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const formValidation = () => {
     const localErrors = {
@@ -55,6 +58,7 @@ export const Login = () => {
       const response = await userService.login(userData);
       console.log("========>", response);
       toast.success("Successfully CONNECTED!");
+      navigate("/home");
 
       // Reset form fields
       setEmail("");
@@ -64,11 +68,9 @@ export const Login = () => {
 
       // Handle error response
       if (e.response && e.response.status === 404) {
-        toast.error("Login endpoint not found. Please check the backend.");
-      } else if (e.response && e.response.data && e.response.data.message) {
-        toast.error(e.response.data.message); // Display error message from the server
+        toast.error(e.response.data.message);
       } else {
-        toast.error("An error occurred. Please try again."); // Fallback error message
+        toast.error("An error occurred. Please try again.");
       }
     }
   };
