@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import "../Style/Login.css";
 import toast, { Toaster } from "react-hot-toast";
+import userService from "../Services/userService";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
-    bio: "",
-    picture: "",
-    birthDate: "",
   });
 
   const formValidation = () => {
     const localErrors = {
-      ...errors,
+      email: "",
+      password: "",
     };
     let isValid = true;
 
@@ -41,41 +38,80 @@ export const Login = () => {
     return isValid;
   };
 
+  const signin = async (e) => {
+    e.preventDefault();
+
+    if (!formValidation()) {
+      toast.error("Please fix the errors in the form.");
+      return;
+    }
+
+    const userData = {
+      email,
+      password,
+    };
+
+    try {
+      const response = await userService.login(userData);
+      console.log("========>", response);
+      toast.success("Successfully CONNECTED!");
+
+      // Reset form fields
+      setEmail("");
+      setPassword("");
+    } catch (e) {
+      console.log("Error", e);
+
+      // Handle error response
+      if (e.response && e.response.status === 404) {
+        toast.error("Login endpoint not found. Please check the backend.");
+      } else if (e.response && e.response.data && e.response.data.message) {
+        toast.error(e.response.data.message); // Display error message from the server
+      } else {
+        toast.error("An error occurred. Please try again."); // Fallback error message
+      }
+    }
+  };
   return (
     <div className="login-container">
       <Toaster />
       <div className="screen-1">
-        <div className="email">
-          <label htmlFor="email">Email Address</label>
-          <div className="sec-2">
-            <ion-icon name="mail-outline"></ion-icon>
-            <input
-              type="email"
-              name="email"
-              placeholder="Username@gmail.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+        <form onSubmit={signin}>
+          <div className="email">
+            <label htmlFor="email">Email Address</label>
+            <div className="sec-2">
+              <ion-icon name="mail-outline"></ion-icon>
+              <input
+                type="email"
+                name="email"
+                placeholder="Username@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            {errors.email && <span className="error">{errors.email}</span>}
           </div>
-          {errors.email && <span>{errors.email}</span>}
-        </div>
-        <div className="password">
-          <label htmlFor="password">Password</label>
-          <div className="sec-2">
-            <ion-icon name="lock-closed-outline"></ion-icon>
-            <input
-              className="pas"
-              type="password"
-              name="password"
-              placeholder="············"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <ion-icon className="show-hide" name="eye-outline"></ion-icon>
+          <div className="password">
+            <label htmlFor="password">Password</label>
+            <div className="sec-2">
+              <ion-icon name="lock-closed-outline"></ion-icon>
+              <input
+                className="pas"
+                type="password"
+                name="password"
+                placeholder="············"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            {errors.password && (
+              <span className="error">{errors.password}</span>
+            )}
           </div>
-          {errors.password && <span>{errors.password}</span>}
-        </div>
-        <button className="login">Login</button>
+          <button className="login" type="submit">
+            Login
+          </button>
+        </form>
         <div className="footer">
           <span>Signup</span>
           <span>Forgot Password?</span>
