@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const [connUserData, setConnUserData] = useState({});
+
+  const navigate = useNavigate();
 
   const getConnectedUserData = () => {
     setConnUserData(JSON.parse(localStorage.getItem("userData")));
@@ -9,7 +12,10 @@ export const Home = () => {
 
   useEffect(() => {
     getConnectedUserData();
-  }, []);
+    if (localStorage.getItem("userData") === null) {
+      navigate("/login");
+    }
+  }, [navigate]);
   return (
     <div>
       <h1>
