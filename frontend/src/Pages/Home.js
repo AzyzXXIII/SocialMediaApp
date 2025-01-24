@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Component/NavBar";
+import "../Style/Home.css";
+import UsernameCard from "./Component/UsernameCard";
 
 export const Home = () => {
   const [connUserData, setConnUserData] = useState({});
-
   const navigate = useNavigate();
 
   const getConnectedUserData = () => {
@@ -16,12 +18,18 @@ export const Home = () => {
       navigate("/login");
     }
   }, [navigate]);
+
   return (
-    <div>
-      <h1>
-        Heeey {connUserData.firstName + ` ` + connUserData.lastName}, welcome to
-        Home page
-      </h1>
+    <div className="home-container">
+      <Navbar />
+
+      <div className="home-content">
+        <h1>
+          Heeey {connUserData.firstName + ` ` + connUserData.lastName}, welcome
+          to Home page
+        </h1>
+        <UsernameCard />
+      </div>
     </div>
   );
 };

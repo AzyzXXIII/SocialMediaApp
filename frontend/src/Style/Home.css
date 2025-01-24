@@ -1,0 +1,38 @@
+/* Ensure html and body take full height */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif; /* Use a modern font */
+}
+
+/* Home Page Container */
+.home-container {
+  padding-top: 70px; /* Add padding to avoid content being hidden behind the fixed navbar */
+  min-height: 100vh; /* Ensure it covers at least the full viewport height */
+  position: relative; /* Needed for absolute positioning of the username card */
+}
+
+/* Username Card Container */
+.username-card-container {
+  position: absolute; /* Position the card absolutely within the home container */
+  top: 80px; /* Adjust this value based on your navbar height */
+  left: 20px; /* Adjust this value to control the distance from the left edge */
+  z-index: 10; /* Ensure the card is above other content */
+}
+
+/* Home Page Content */
+.home-content {
+  max-width: 800px; /* Optional: Limit content width */
+  margin: 0 auto; /* Center the content horizontally */
+  padding: 20px;
+  text-align: center; /* Center the text */
+}
+
+.home-content h1 {
+  font-size: 36px; /* Larger font size for the heading */
+  color: #ffffff; /* White text */
+  margin-bottom: 20px;
+  font-weight: bold; /* Bold text for emphasis */
+}

@@ -1,0 +1,46 @@
+/* Container for the username card */
+.username-card {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  max-width: 300px;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Hover effect for the card */
+.username-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for the user image */
+.usernameCard-image .user-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+}
+
+/* Container for the user info */
+.usernameCard-info {
+  margin-left: 16px;
+}
+
+/* Styling for the username */
+.usernameCard-info .username {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0;
+}
+
+/* Styling for the user handle */
+.usernameCard-info .user-handle {
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
+}
